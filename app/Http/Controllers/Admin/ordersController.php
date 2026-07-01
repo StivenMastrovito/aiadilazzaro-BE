@@ -7,7 +7,9 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Table;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class ordersController extends Controller
 {
@@ -33,7 +35,10 @@ class ordersController extends Controller
         $ultimoOrdine = Order::latest('number_order')->first();
         $prossimoOrdine = 1;
 
-        if ($ultimoOrdine) {
+        $createdAt = Carbon::parse($ultimoOrdine['created_at']);
+        $todayThree = Carbon::today()->setTime(3, 0, 0);
+
+        if ($ultimoOrdine && $createdAt->lessThan($todayThree)) {
             $prossimoOrdine = $ultimoOrdine->number_order + 1;
         }
 
