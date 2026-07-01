@@ -118,22 +118,6 @@ class ordersController extends Controller
                         'note' => null,
                     ]);
                 }
-
-                // $existing = $order->products()
-                //     ->wherePivot('product_id', $productId)
-                //     ->wherePivotNull('note')
-                //     ->first();
-
-                // if ($existing) {
-                //     OrderProduct::where('id', $existing->pivot->id)->update([
-                //         'qty' => $existing->pivot->qty + $pivot['qty'],
-                //     ]);
-                // } else {
-                //     $order->products()->attach($productId, [
-                //         'qty'  => $pivot['qty'],
-                //         'note' => null,
-                //     ]);
-                // }
             }
         }
 
