@@ -32,14 +32,18 @@ class ordersController extends Controller
 
         $price = $data['peoples'] * 2;
 
+
         $ultimoOrdine = Order::latest('number_order')->first();
         $prossimoOrdine = 1;
 
-        $createdAt = Carbon::parse($ultimoOrdine['created_at']);
         $todayThree = Carbon::today()->setTime(3, 0, 0);
 
-        if ($ultimoOrdine && $createdAt->lessThan($todayThree)) {
-            $prossimoOrdine = $ultimoOrdine->number_order + 1;
+        if ($ultimoOrdine) {
+            $createdAt = Carbon::parse($ultimoOrdine->created_at);
+
+            if ($createdAt->greaterThanOrEqualTo($todayThree)) {
+                $prossimoOrdine = $ultimoOrdine->number_order + 1;
+            }
         }
 
         $order = new Order();

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\categoryController;
 use App\Http\Controllers\Admin\ordersController;
 use App\Http\Controllers\Admin\productsController;
 use App\Http\Controllers\Admin\QzController;
+use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\Admin\tablesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -45,8 +46,9 @@ Route::prefix('/orders')->controller(ordersController::class)->group(function ()
     Route::post('/close/{order}', 'closeOrder');
     Route::post('/getUnprinted/{order}', 'getUnprinted');
     Route::post('/printed', 'updatePrinted');
-
 });
+
+Route::post('/stats', [StatsController::class, 'index']);
 
 
 Route::get('/qz-certificate', [QzController::class, 'certificate']);
